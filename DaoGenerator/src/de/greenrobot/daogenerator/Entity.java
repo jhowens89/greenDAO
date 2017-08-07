@@ -2,7 +2,7 @@
  * Copyright (C) 2011-2015 Markus Junginger, greenrobot (http://greenrobot.de)
  *
  * This file is part of greenDAO Generator.
- * 
+ *
  * greenDAO Generator is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -11,7 +11,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with greenDAO Generator.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -57,6 +57,7 @@ public class Entity {
 
     private String tableName;
     private String classNameDao;
+    private String superclassDao;
     private String classNameTest;
     private String javaPackage;
     private String javaPackageDao;
@@ -78,18 +79,19 @@ public class Entity {
     Entity(Schema schema, String className) {
         this.schema = schema;
         this.className = className;
-        properties = new ArrayList<Property>();
-        propertiesPk = new ArrayList<Property>();
-        propertiesNonPk = new ArrayList<Property>();
-        propertyNames = new HashSet<String>();
-        indexes = new ArrayList<Index>();
-        toOneRelations = new ArrayList<ToOne>();
-        toManyRelations = new ArrayList<ToManyBase>();
-        incomingToManyRelations = new ArrayList<ToManyBase>();
-        additionalImportsEntity = new TreeSet<String>();
-        additionalImportsDao = new TreeSet<String>();
-        interfacesToImplement = new ArrayList<String>();
-        contentProviders = new ArrayList<ContentProvider>();
+        this.superclassDao = "AbstractDao";
+        properties = new ArrayList<>();
+        propertiesPk = new ArrayList<>();
+        propertiesNonPk = new ArrayList<>();
+        propertyNames = new HashSet<>();
+        indexes = new ArrayList<>();
+        toOneRelations = new ArrayList<>();
+        toManyRelations = new ArrayList<>();
+        incomingToManyRelations = new ArrayList<>();
+        additionalImportsEntity = new TreeSet<>();
+        additionalImportsDao = new TreeSet<>();
+        interfacesToImplement = new ArrayList<>();
+        contentProviders = new ArrayList<>();
         constructors = true;
     }
 
@@ -317,6 +319,14 @@ public class Entity {
 
     public void setClassNameDao(String classNameDao) {
         this.classNameDao = classNameDao;
+    }
+
+    public String getSuperclassDao() {
+        return this.superclassDao;
+    }
+
+    public void setSuperclassDao(String classToExtend) {
+        this.superclassDao = classToExtend;
     }
 
     public String getClassNameTest() {
